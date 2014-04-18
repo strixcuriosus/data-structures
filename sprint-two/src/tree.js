@@ -14,7 +14,6 @@ treeMethods.addChild = function(value){
 
 treeMethods.contains = function(target){
   var targetFound = false;
-  var node = node || this;
   var traverseTree = function(node){
     if (node.value === target) {
       targetFound = true;
@@ -22,10 +21,9 @@ treeMethods.contains = function(target){
       for (var i = 0; i < node.children.length; i++) {
         traverseTree(node.children[i]);
       }
-    } else {
     }
   };
-  traverseTree()
+  traverseTree(this);
   return targetFound;
 };
 
