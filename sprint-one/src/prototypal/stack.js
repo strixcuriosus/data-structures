@@ -1,37 +1,29 @@
-var makeStack = function(){
+var makeStack = function() {
+  // copied from fun-shared
   var instance = Object.create(stackMethods);
-
   // Use an object with numeric keys to store values
-  instance._storage = {};
-  instance._size = 0; // Hint: set an initial value here
-
-  // Import methods
-  //extend(stackMethods,instance);
-
+  instance.storage = {};
+  instance.sizeVar = 0; // Hint: set an initial value here
+  // Implement the methods below
   return instance;
 };
 
 var stackMethods = {};
 
 stackMethods.push = function(value){
-  this._storage[this._size] = value;
-  this._size++;
+  this.storage[this.sizeVar] = value;
+  this.sizeVar++;
 };
 
 stackMethods.pop = function(){
-    if (this._size){
-      var poppedVal = this._storage[--this._size];
-    }
-    return poppedVal;
+  var val = null;
+  if (this.sizeVar > 0) {
+    this.sizeVar--;
+    val = this.storage[this.sizeVar];
+  }
+  return val;
 };
 
 stackMethods.size = function(){
-  return this._size;
-};
-
-
-var extend = function (from, to){
-  for (var key in from){
-    to[key] = from[key];
-  }
+  return this.sizeVar;
 };

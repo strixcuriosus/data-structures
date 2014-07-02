@@ -2,6 +2,7 @@ var makeTree = function(value){
   var newTree = Object.create(treeMethods);
   newTree.value = value;
   newTree.children = [];
+  extend(newTree, treeMethods);
   return newTree;
 };
 
@@ -25,5 +26,12 @@ treeMethods.contains = function(target){
   };
   traverseTree(this);
   return targetFound;
+};
+
+
+var extend = function(to, from){
+  for (var key in from) {
+    to[key] = from[key];
+  }
 };
 
