@@ -1,37 +1,37 @@
 var makeTree = function(value){
-  var newTree = Object.create(treeMethods);
-  newTree.value = value;
-  newTree.children = [];
-  extend(newTree, treeMethods);
-  return newTree;
+  var tree = {};
+  tree.value = value;
+  tree.children = [];
+  extend(tree, treeMethods);
+  return tree;
 };
 
 
 var treeMethods = {};
 
-treeMethods.addChild = function(value){
-  this.children.push(makeTree(value));
+treeMethods.addChild = function (value) {
+  var child = makeTree(value);
+  this.children.push(child);
 };
 
-treeMethods.contains = function(target){
-  var targetFound = false;
-  var traverseTree = function(node){
-    if (node.value === target) {
-      targetFound = true;
-    } else if(node.children.length){
+treeMethods.contains = function (target) {
+  var node = this;
+  var found = false;
+  var traverseTree = function (node) {
+    if(node.value === target) {
+      found = true;
+    } else {
       for (var i = 0; i < node.children.length; i++) {
         traverseTree(node.children[i]);
       }
     }
   };
-  traverseTree(this);
-  return targetFound;
+  traverseTree(node);
+  return found;
 };
-
 
 var extend = function(to, from){
   for (var key in from) {
     to[key] = from[key];
   }
 };
-
