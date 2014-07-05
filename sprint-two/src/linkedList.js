@@ -1,40 +1,37 @@
 var makeLinkedList = function(){
-  var list = {};
-  list.head = null;
-  list.tail = null;
+  var linkedList = {};
+  linkedList.head = null;
+  linkedList.tail = null;
 
-  list.addToTail = function(value){
-    var newNode = makeNode(value);
-    if (this.tail) {
-      this.tail.next = newNode;
-    }
-    this.tail = newNode;
-    if(this.head === null){
-      this.head = this.tail;
-    }
-  };
-
-  list.removeHead = function(){
-    var result = this.head;
-    this.head = this.head.next;
-    return result;
-  };
-
-  list.contains = function(target, node){
-    if(!node) {
-      node = this.head;
-    }
-
-    if(node.value === target) {
-      return true;
-    } else if (!node.next) {
-      return false;
+  linkedList.addToTail = function (value) {
+    var node = makeNode(value);
+    if (! this.head) {
+      this.head = node;
+      this.tail = node;
     } else {
-      return this.contains(target, node.next);
+      this.tail.next = node;
+      this.tail = node;
     }
   };
 
-  return list;
+  linkedList.removeHead = function() {
+    if(this.head) {
+      this.head = this.head.next;
+    }
+  };
+
+  linkedList.contains = function (target) {
+    var node = this.head;
+    while (node) {
+      if (node.value === target) {
+        return true;
+      }
+      node = node.next;
+    }
+    return false;
+  };
+
+  return linkedList;
 };
 
 var makeNode = function(value){
